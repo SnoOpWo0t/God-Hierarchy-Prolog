@@ -1,20 +1,3 @@
-================================================================================
-                    GOD HIERARCHIES - COMPREHENSIVE KNOWLEDGE BASE
-================================================================================
-This database contains information about deities from multiple world religions
- and mythologies, including their family relationships, domains of power, and
- hierarchical classifications. The knowledge base is designed for educational
- purposes and comparative mythology studies.
- COVERAGE SUMMARY:
-- 10 Different mythologies/religions represented
- - 72 Total deities and religious figures
-- Complete family relationship mappings
- - Domain and power classifications
- - Cross-mythology comparative analysis tools
- =============================================================================
-                             DEITIES DATABASE
-=============================================================================
-
 PRIMARY FACT STRUCTURE:
 god(Name, Mythology, Gender, Status, Era)
 
@@ -25,29 +8,30 @@ PARAMETERS EXPLAINED:
 - Status: supreme_deity, major_deity, minor_deity, primordial, prophet, avatar, divine_figure
 - Era: ancient, classical, medieval, modern
 
-STATUS HIERARCHY (highest to lowest):
-1. supreme_deity - Top-level gods (Zeus, Odin, Brahma, etc.)
-2. major_deity - Important gods with significant roles
-3. minor_deity - Lesser gods with specific functions
-4. primordial - Ancient primeval deities (Chronus, Izanagi, etc.)
-5. prophet - Religious messengers and leaders
-6. avatar - Divine incarnations (Rama, Krishna)
-7. divine_figure - Religious figures with divine status
 
------------------------ GREEK MYTHOLOGY -----------------------
-Origin: Ancient Greece (8th century BCE - 6th century CE)
-Characteristics: Polytheistic pantheon with complex family relationships
-Supreme Deity: Zeus (king of gods, ruler of sky and thunder)
-Total Entities: 17 (1 supreme, 14 major, 2 primordial)
-================================================================================
-                          MYTHOLOGY OVERVIEW QUERIES  
-================================================================================
 
 % See all mythologies represented
 forall(pantheon_head(God, Mythology), (write(Mythology), write(': '), write(God), nl)).
 
+list_gods_from(greek).      list_gods_from(norse).
+list_gods_from(hindu).      list_gods_from(japanese).
+list_gods_from(egyptian).   list_gods_from(celtic).
+
+forall(greek_god(G), (write(G), nl)).
+forall(norse_god(G), (write(G), nl)).
+forall(hindu_god(G), (write(G), nl)).
+forall(japanese_god(G), (write(G), nl)).
+forall(egyptian_god(G), (write(G), nl)).
+forall(celtic_god(G), (write(G), nl)).
+
+% Count all Greek gods:
+
+
+% Count all supreme deities:
+findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
+
 % Count deities by mythology
-findall(God, greek_god(God), List), length(List, N), write('Greek: '), write(N), nl.
+findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
 findall(God, norse_god(God), List), length(List, N), write('Norse: '), write(N), nl.
 findall(God, hindu_god(God), List), length(List, N), write('Hindu: '), write(N), nl.
 findall(God, japanese_god(God), List), length(List, N), write('Japanese: '), write(N), nl.
@@ -58,8 +42,7 @@ findall(God, christian_figure(God), List), length(List, N), write('Christian: ')
 findall(God, jewish_figure(God), List), length(List, N), write('Jewish: '), write(N), nl.
 findall(God, abrahamic_figure(God), List), length(List, N), write('Abrahamic: '), write(N), nl.
 
-================================================================================
-🔱 SUPREME DEITIES QUERIES
+
 ================================================================================
 
 % List all supreme deities
@@ -77,8 +60,6 @@ supreme_deity(amun).
 supreme_deity(dagda). 
 supreme_deity(allah).
 
-================================================================================
-🌍 GODS BY MYTHOLOGY QUERIES
 ================================================================================
 
 % Formatted mythology displays
@@ -106,8 +87,7 @@ mythology_stats(egyptian).
 mythology_stats(celtic).
 
 ================================================================================
-👪 FAMILY RELATIONSHIPS QUERIES
-================================================================================
+
 
 % Family tree displays
 family_tree(zeus). 
@@ -153,8 +133,6 @@ child_count(zeus, N).
 sibling_count(thor, N).
 
 ================================================================================
-📚 DEITY DOMAINS QUERIES
-================================================================================
 
 % See all domain mappings
 forall(domain(God, Domain), (write(God), write(' -> '), write(Domain), nl)).
@@ -179,8 +157,7 @@ show_domain_gods(love).
 show_domain_gods(death).
 
 ================================================================================
-⚔️ DOMAIN-SPECIFIC DEITIES QUERIES
-================================================================================
+
 
 % War deities across mythologies
 forall(war_deity(God), (write(God), nl)).
@@ -200,8 +177,7 @@ afterlife_deity(osiris).
 nature_deity(dagda).
 
 ================================================================================
-🧬 GENDER CLASSIFICATION QUERIES
-================================================================================
+
 
 % Gender-based listings
 forall(male_god(God), (write('Male: '), write(God), nl)).
@@ -219,8 +195,7 @@ forall((male_god(G), war_deity(G)), write(G)).
 forall((female_god(G), wisdom_deity(G)), write(G)).
 
 ================================================================================
-🏛️ PANTHEON ANALYSIS QUERIES
-================================================================================
+
 
 % Pantheon heads
 pantheon_head(zeus, greek). 
@@ -233,8 +208,7 @@ same_mythology(zeus, hera).
 same_mythology(odin, thor).
 
 ================================================================================
-🕰️ ERA & STATUS CLASSIFICATION QUERIES
-================================================================================
+
 
 % Status classifications
 major_deity(zeus). 
@@ -250,8 +224,7 @@ avatar(krishna).
 divine_figure(buddha).
 
 ================================================================================
-📈 STATISTICAL QUERIES
-================================================================================
+
 
 % Count queries by category
 findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
@@ -260,8 +233,6 @@ findall(God, war_deity(God), List), length(List, N), write('War deities: '), wri
 findall(God, female_god(God), List), length(List, N), write('Female deities: '), write(N), nl.
 
 ================================================================================
-🧪 EXAMPLE SESSION QUERIES
-================================================================================
 
 % Complete example session
 list_gods_from(greek).
@@ -269,15 +240,9 @@ family_tree(zeus).
 forall(war_deity(God), (write(God), nl)).
 mythology_stats(norse).
 
-% Count all Greek gods:
-findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
-
-% Count all supreme deities:
-findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
 
 ================================================================================
-🔍 ADVANCED COMPLEX QUERIES
-================================================================================
+
 
 % Complex relationship analysis
 findall(X, (greek_god(X), has_children(X)), Parents), 
@@ -337,8 +302,7 @@ forall((same_domain(X, Y), \+ same_mythology(X, Y)),
        (write(X), write(' and '), write(Y), write(' share domains across mythologies'), nl)).
 
 ================================================================================
-🎯 SPECIALIZED ANALYSIS QUERIES
-================================================================================
+
 
 % Thunder/Storm deities comparison
 forall(thunder_deity(G), 
@@ -383,8 +347,7 @@ forall(avatar(G),
        (write('Avatar: '), write(G), nl)).
 
 ================================================================================
-📊 COMPREHENSIVE STATISTICAL ANALYSIS
-================================================================================
+
 
 % Complete mythology statistics
 forall(mythology_stats(M), true).
@@ -397,13 +360,7 @@ write('Male deities: '), write(MaleCount), nl,
 write('Female deities: '), write(FemaleCount), nl,
 write('Gender neutral deities: '), write(NeutralCount), nl.
 
-% Status distribution
-findall(G, supreme_deity(G), Supremes), length(Supremes, SupremeCount),
-findall(G, major_deity(G), Majors), length(Majors, MajorCount),
-findall(G, primordial_deity(G), Primordials), length(Primordials, PrimordialCount),
-write('Supreme deities: '), write(SupremeCount), nl,
-write('Major deities: '), write(MajorCount), nl,
-write('Primordial deities: '), write(PrimordialCount), nl.
+
 
 % Domain popularity analysis
 findall(D, domain(_, D), AllDomains), 
@@ -419,52 +376,7 @@ Categories Covered: 10 major query types
 Complexity Levels: Basic to Advanced
 Educational Value: Complete reference for learning Prolog and mythology analysis
 -----------------------------------------------------------
-📚 RELIGIONS & MYTHOLOGIES IN YOUR DATABASE
-🏛️ ANCIENT MYTHOLOGIES
-1. GREEK MYTHOLOGY
-Supreme Deity: Zeus
-Major Deities: Hera, Hades, Poseidon, Demeter, Athena, Apollo, Artemis, Ares, Hephaestus, Aphrodite, Hermes, Dionysus, Hestia, Persephone
-Primordial Deities: Chronus, Rhea
-Total: 17 entities
-2. NORSE MYTHOLOGY
-Supreme Deity: Odin
-Major Deities: Frigg, Thor, Baldur, Loki, Freya, Frey, Tyr, Heimdall, Vidar, Vali
-Total: 11 entities
-3. HINDU MYTHOLOGY
-Supreme Deities: Brahma, Vishnu, Shiva (Hindu Trinity)
-Major Deities: Saraswati, Lakshmi, Parvati, Ganesha, Kartikeya, Hanuman, Indra, Surya, Chandra
-Avatars: Rama, Krishna
-Total: 14 entities
-4. JAPANESE MYTHOLOGY
-Supreme Deity: Amaterasu
-Primordial Deities: Izanagi, Izanami
-Major Deities: Tsukuyomi, Susanoo, Inari, Raijin, Fujin, Hachiman
-Total: 9 entities
-5. EGYPTIAN MYTHOLOGY
-Supreme Deities: Ra, Amun
-Major Deities: Isis, Osiris, Horus, Anubis, Thoth, Bastet, Sobek, Nephthys
-Total: 10 entities
-6. CELTIC MYTHOLOGY
-Supreme Deity: Dagda
-Major Deities: Brigid, Lugh, Morrigan, Cernunnos
-Primordial Deity: Danu
-Total: 6 entities
-📖 ABRAHAMIC RELIGIONS
-7. ISLAMIC TRADITION
-Supreme Deity: Allah
-Prophet: Muhammad
-Total: 2 entities
-8. CHRISTIAN TRADITION
-Divine Figure: Jesus
-Total: 1 entity
-9. JEWISH TRADITION
-Prophet: Moses
-Total: 1 entity
-10. GENERAL ABRAHAMIC
-Prophet: Abraham
-Total: 1 entity
-% Load the database first
-consult('God Hiarchy.pl').
+
 
 % See all mythologies represented
 forall(pantheon_head(God, Mythology), (write(Mythology), write(': '), write(God), nl)).
@@ -481,38 +393,19 @@ findall(God, christian_figure(God), List), length(List, N), write('Christian: ')
 findall(God, jewish_figure(God), List), length(List, N), write('Jewish: '), write(N), nl.
 findall(God, abrahamic_figure(God), List), length(List, N), write('Abrahamic: '), write(N), nl.
 ---------------------------------------------------------------
-% ╔═══════════════════════════════════════════════════════════════════════════╗
-% ║                      GOD HIERARCHIES - QUERY CHEATSHEET                  ║
-% ╚═══════════════════════════════════════════════════════════════════════════╝
-% ============================================================================
-% 🔱 SUPREME DEITIES
-% ============================================================================
+
 forall(supreme_deity(God), (write('Supreme Deity: '), write(God), nl)).
 supreme_deity(zeus). supreme_deity(odin). supreme_deity(brahma).
 supreme_deity(vishnu). supreme_deity(shiva). supreme_deity(amaterasu).
 supreme_deity(ra). supreme_deity(amun). supreme_deity(dagda). supreme_deity(allah).
   #
 ============================================================================
-🌍 GODS BY MYTHOLOGY
-============================================================================
-list_gods_from(greek).      list_gods_from(norse).
-list_gods_from(hindu).      list_gods_from(japanese).
-list_gods_from(egyptian).   list_gods_from(celtic).
-
-forall(greek_god(G), (write(G), nl)).
-forall(norse_god(G), (write(G), nl)).
-forall(hindu_god(G), (write(G), nl)).
-forall(japanese_god(G), (write(G), nl)).
-forall(egyptian_god(G), (write(G), nl)).
-forall(celtic_god(G), (write(G), nl)).
-
 
 mythology_stats(greek). mythology_stats(norse). mythology_stats(hindu).
 mythology_stats(japanese). mythology_stats(egyptian). mythology_stats(celtic).
 
 ============================================================================
-👪 FAMILY RELATIONSHIPS
-============================================================================
+
 family_tree(zeus). family_tree(odin). family_tree(shiva). family_tree(amaterasu).
 
 parent(zeus, ares). parent(odin, thor). parent(shiva, ganesha).
@@ -531,7 +424,7 @@ has_children(zeus). childless(athena). has_parents(ares). orphan(athena).
 child_count(zeus, N). sibling_count(thor, N).
 
 ============================================================================
-📚 DEITY DOMAINS
+
 to see Domain o all god =  forall(domain(God, Domain), (write(God), write(' -> '), write(Domain), nl)).
 ============================================================================
 domain(zeus, thunder). domain(odin, wisdom). domain(shiva, destruction).
@@ -543,8 +436,7 @@ show_domain_gods(war). show_domain_gods(wisdom).
 show_domain_gods(love). show_domain_gods(death).
 
 ============================================================================
-⚔️ DOMAIN-SPECIFIC DEITIES
-============================================================================
+
 forall(war_deity(God), (write(God), nl)).
 war_deity(ares). war_deity(thor). war_deity(kartikeya).
 wisdom_deity(athena). wisdom_deity(odin). wisdom_deity(saraswati).
@@ -554,8 +446,7 @@ sun_deity(amaterasu). afterlife_deity(osiris). nature_deity(dagda).
 forall(wisdom_deity(God), (write(God), nl)).
 
 ============================================================================
-🧬 GENDER CLASSIFICATION
-============================================================================
+
 forall(male_god(God), (write('Male: '), write(God), nl)).
 forall(female_god(God), (write('Female: '), write(God), nl)).
 forall(gender_neutral(God), (write('Neutral: '), write(God), nl)).
@@ -565,42 +456,14 @@ male war deities: forall((male_god(G), war_deity(G)), write(G)).
 female wisdom deities: forall((female_god(G), wisdom_deity(G)), write(G)).
 
 ============================================================================
-🏛️ PANTHEON ANALYSIS
-============================================================================
+
 pantheon_head(zeus, greek). pantheon_head(odin, norse).
 pantheon_head(shiva, hindu). pantheon_head(amaterasu, japanese).
 
 same_mythology(zeus, hera). same_mythology(odin, thor).
-
-============================================================================
-🕰️ ERA & STATUS CLASSIFICATION
-============================================================================
 major_deity(zeus). minor_deity(erios).
 primordial_deity(chaos). classical_deity(hera).
 medieval_deity(odin). modern_deity(allah).
 
 prophet(muhammad). avatar(krishna).
 divine_figure(buddha).
-
-============================================================================
-📈 STATISTICAL QUERIES
-============================================================================
-findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
-findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
-findall(God, war_deity(God), List), length(List, N), write('War deities: '), write(N), nl.
-findall(God, female_god(God), List), length(List, N), write('Female deities: '), write(N), nl.
-
-============================================================================
-🧪 EXAMPLE SESSION
-============================================================================
-list_gods_from(greek).
-family_tree(zeus).
-forall(war_deity(God), (write(God), nl)).
-mythology_stats(norse).
-  Count all Greek gods:
-  findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
-
-  Count all supreme deities:
-  findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
-
-*
