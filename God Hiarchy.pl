@@ -362,7 +362,6 @@ domain(abraham, faith).
 
 % =============================================================================
 %                           RELATIONSHIP RULES
-% =============================================================================
 
 % Basic parent relationship (derived from father/mother)
 parent(X, Y) :- father(Y, X).
@@ -388,11 +387,11 @@ grandparent(GP, C) :- parent(GP, P), parent(P, C).
 % Great-grandparent relationship
 great_grandparent(GGP, C) :- grandparent(GGP, P), parent(P, C).
 
-% Ancestor relationship (transitive closure)
+% Ancestor relationship (recursive relations)
 ancestor(A, D) :- parent(A, D).
 ancestor(A, D) :- parent(A, X), ancestor(X, D).
 
-% Descendant relationship
+% Descendant relationship (recursive relations)
 descendant(D, A) :- ancestor(A, D).
 
 % Uncle/Aunt relationship
@@ -400,11 +399,34 @@ uncle_aunt(U, N) :-
     parent(P, N),
     sibling(U, P),
     male_god(U).
+
+% =============================================================================
+%             (Recursive Relations)
+
+% descendants(Ancestor, DescendantList)
+% Recursively collects all descendants of a deity
+descendants(A, Descendants) :-
+    findall(D, descendant(D, A), Descendants).
+
+% count_descendants(Ancestor, Count)
+% Recursively counts all descendants of a deity
+count_descendants(A, Count) :-
+    descendants(A, Descendants),
+    length(Descendants, Count).
+
+% lineage(Deity, LineageList)
+% Recursively builds a list of ancestors up to the root
+lineage(D, [D|Rest]) :-
+    parent(P, D),
+    lineage(P, Rest).
+lineage(D, [D]) :-
+    \+ has_parents(D).
     
 aunt(A, N) :- 
     parent(P, N),
     sibling(A, P),
     female_god(A).
+
 
 % Cousin relationship
 cousin(X, Y) :- 
@@ -418,7 +440,7 @@ married(X, Y) :- spouse(Y, X).
 
 % =============================================================================
 %                         CLASSIFICATION RULES
-% =============================================================================
+
 
 % Gender classifications
 male_god(X) :- god(X, _, male, _, _).
